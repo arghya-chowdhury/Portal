@@ -1,0 +1,49 @@
+﻿@model PortalApp.ViewModels.ContactViewModel
+<form asp-action="Contact" data-ajax="true" data-ajax-method="POST"
+      data-ajax-begin="onBegin" data-ajax-complete="onComplete"
+      data-ajax-failure="onFailed" data-ajax-success="onSuccess"
+      data-ajax-loading="#spinner">
+    <div id="contact" class="container-fluid">
+        <br />
+        <h3 class="text-center">CONTACT</h3>
+        <div class="row">
+            <div id="contactInfo" class="col-md-offset-1 col-md-3 col-sm-offset-1 col-sm-3 col-xs-offset-1 col-xs-10 text-left">
+                <p><span style="font-weight:bolder">GET IN TOUCH</span></p>
+                <p style=""><span class="glyphicon glyphicon-map-marker"></span> London, United Kingdom</p>
+                <p style=""><span class="glyphicon glyphicon-phone"></span> Phone: +44 7438967872</p>
+                <p style=""><span class="glyphicon glyphicon-envelope"></span> Email: arghya.ch.uk@gmail.com</p>
+            </div>
+            <div id="contactForm" class="col-md-6 col-sm-6 col-xs-offset-1 col-xs-10">
+                <div class="row">
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                        <input asp-for="Name" class="form-control" id="name" name="name" placeholder="Name" type="text"/>
+                        <span asp-validation-for="Name"/>
+                    </div>
+                    <div class="col-md-6 col-sm-6 col-xs-12 form-group">
+                        <input asp-for="Email" class="form-control" id="email" name="email" placeholder="Email" type="email" />
+                        <span asp-validation-for="Email"/>
+                    </div>
+                    <input type="hidden" id="longitude" asp-for="Longitude" />
+                    <input type="hidden" id="latitude" asp-for="Latitude" />
+                </div>
+                <textarea asp-for="Message" class="form-control" id="comments" name="comments" placeholder="Message" rows="5"></textarea>
+                <br>
+                <div class="row">
+                    <div class="col-md-12 col-sm-12 col-xs-12 form-group">
+                        <button id="btnPost" type="submit" class="btn pull-right">Send Message</button>
+                    </div>
+                </div>
+                <div class="row">
+                    <div asp-validation-summary="ModelOnly"></div>
+                </div>
+            </div>
+        </div>
+        <br />
+    </div>
+</form>
+@section Scripts {
+    <script src="~/lib/jquery-validation/dist/jquery.validate.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.js"></script>
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial"); }
+}
+
