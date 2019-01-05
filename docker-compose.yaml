@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: portalapp
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: portalapp
+  template:
+    metadata:
+      labels:
+        app: portalapp
+    spec:
+      containers:
+      - name: portalapp
+        image: portalapp.azurecr.io/portalapp
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 80
+      imagePullSecrets:
+      - name: secret
+        
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: portalapp
+  labels:
+    apps: portalapp
+spec:
+  type: LoadBalancer
+  ports:
+  - port: 8080
+    targetPort: 80
+  selector:
+    app: portalapp
