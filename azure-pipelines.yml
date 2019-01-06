@@ -16,7 +16,7 @@ steps:
 - script: dotnet build --configuration $(buildConfiguration)
   displayName: 'dotnet build $(buildConfiguration)'
 - script: |
-    docker build --rm=false -t $(dockerId).azurecr.io/$(imageName) .
+    docker build --rm=false -t $(dockerId).azurecr.io/$(imageName) ./
     docker login -u $(dockerId) -p $(pswd) $(dockerId).azurecr.io
     docker image ls
     docker push $(dockerId).azurecr.io/$(imageName)
