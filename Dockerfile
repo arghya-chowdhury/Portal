@@ -1,9 +1,9 @@
 FROM microsoft/dotnet:2.1-sdk AS build-env
 WORKDIR /app
-COPY ./PortalApp/*.csproj ./
+COPY *.csproj ./
 RUN dotnet restore
 COPY . ./
-RUN dotnet publish ./PortalApp/PortalApp.csproj -c Release -o out
+RUN dotnet publish -c Release -o out
 
 FROM microsoft/dotnet:2.1-aspnetcore-runtime
 WORKDIR /app
